@@ -1,4 +1,4 @@
-# bee-swarm-cli-docker
+# Bee and Swarm CLI Docker image
 Latitude.sh Launchpad blueprint for Bee and swarm cli
 
 [Blueprint link](https://latitude.sh/blueprint/1cnxvazdFwuBm5vWtab0Bg)
