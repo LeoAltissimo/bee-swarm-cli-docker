@@ -22,7 +22,7 @@ fi
 service ssh start
 
 # Start Bee service
-bee start
+bee start --config /etc/bee/bee.yaml
 
 # Keep the container running
 tail -f /dev/null

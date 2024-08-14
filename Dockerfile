@@ -1,6 +1,5 @@
 FROM ubuntu:latest
 
-ENV BEE_VERSION=1.8.0
 ENV NVM_DIR=/root/.nvm
 
 # Updating and installing dependencies
@@ -29,18 +28,14 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | b
     npm install --global @ethersphere/swarm-cli
 
 # Installing Bee
-RUN curl -fsSL https://repo.ethswarm.org/apt/gpg.key | gpg --dearmor -o /usr/share/keyrings/ethersphere-apt-keyring.gpg && \
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ethersphere-apt-keyring.gpg] https://repo.ethswarm.org/apt * *" | tee /etc/apt/sources.list.d/ethersphere.list > /dev/null && \
-    apt-get update -y && \
-    while lsof /var/lib/dpkg/lock-frontend ; do sleep 1; done; \
-    apt-get install bee -y
+RUN curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | bash
 
 # Copying Bee configuration file
 RUN /bin/bash -c ". $NVM_DIR/nvm.sh && mkdir -p /etc/bee && npx bee-yaml > /etc/bee/bee.yaml"
 
 
 # Exposing SSH and Bee ports
-EXPOSE 22 1633 1634 1635
+EXPOSE 22 1633 1634
 
 COPY --chmod=755 scripts/* .
 
